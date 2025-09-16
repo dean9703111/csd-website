@@ -352,5 +352,14 @@
     "contactInquiry": "お問い合わせ",
     "copyright": "版権所有",
     "allRightsReserved": "All rights reserved."
+  },
+  "voiceAssistant": {
+    "listening": "継続的に聞いています...",
+    "recognized": "認識されました",
+    "languageChanged": "言語が変更されました",
+    "navigating": "ナビゲーション中",
+    "startListening": "継続音声認識を開始",
+    "stopListening": "音声認識を停止",
+    "helpTitle": "利用可能な音声コマンド"
   }
 }

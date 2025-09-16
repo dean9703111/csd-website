@@ -352,5 +352,14 @@
     "contactInquiry": "Contact Inquiry",
     "copyright": "All rights reserved",
     "allRightsReserved": "All rights reserved."
+  },
+  "voiceAssistant": {
+    "listening": "Continuously listening...",
+    "recognized": "Recognized",
+    "languageChanged": "Language changed",
+    "navigating": "Navigating",
+    "startListening": "Start continuous voice recognition",
+    "stopListening": "Stop voice recognition",
+    "helpTitle": "Available voice commands"
   }
 }

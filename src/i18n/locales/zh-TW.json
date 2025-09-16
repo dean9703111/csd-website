@@ -352,5 +352,14 @@
     "contactInquiry": "聯絡洽詢",
     "copyright": "版權所有",
     "allRightsReserved": "All rights reserved."
+  },
+  "voiceAssistant": {
+    "listening": "持續聆聽中...",
+    "recognized": "已辨識",
+    "languageChanged": "語言已切換",
+    "navigating": "正在導航",
+    "startListening": "開始持續語音辨識",
+    "stopListening": "停止語音辨識",
+    "helpTitle": "可用的語音指令"
   }
 }

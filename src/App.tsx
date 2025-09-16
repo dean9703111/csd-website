@@ -8,12 +8,15 @@ import AchievementsSection from './components/AchievementsSection';
 import ForwardServiceSection from './components/ForwardServiceSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import VoiceAssistant from './components/VoiceAssistant';
+import { useNavigation } from './hooks/useNavigation';
 import data from './data.json';
 import './i18n';
 
 function App() {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     // 模擬載入時間
@@ -67,6 +70,7 @@ function App() {
       <ForwardServiceSection data={data} />
       <ContactSection data={data} />
       <Footer data={data} />
+      <VoiceAssistant onNavigate={navigate} />
     </div>
   );
 }
