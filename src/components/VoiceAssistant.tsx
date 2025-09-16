@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { keyframes, css } from 'styled-components';
 
@@ -254,7 +254,7 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
         setStatusText(`${t('voiceAssistant.languageChanged') as string}: ${matchedKeyword}`);
         
         // 停止當前語音辨識並重新初始化
-        if (recognitionRef.current && isListening) {
+        if (recognitionRef.current && isListeningRef.current) {
           // 先停止語音辨識
           try {
             recognitionRef.current.stop();
@@ -272,7 +272,82 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
           
           // 延遲重新啟動以確保語言切換完成
           setTimeout(() => {
-            startListening();
+            // 直接在這裡重新啟動語音辨識，避免循環依賴
+            if (!isListeningRef.current) {
+              if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognitionRef.current = new SpeechRecognition();
+                
+                const recognition = recognitionRef.current;
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = matchedAction === 'zh-TW' ? 'zh-TW' : matchedAction;
+
+                recognition.onstart = () => {
+                  setIsListening(true);
+                  isListeningRef.current = true;
+                  setStatusText(t('voiceAssistant.listening') as string);
+                  setShowStatus(true);
+                };
+
+                recognition.onresult = (event) => {
+                  let finalTranscript = '';
+                  let interimTranscript = '';
+
+                  for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                      finalTranscript += transcript;
+                    } else {
+                      interimTranscript += transcript;
+                    }
+                  }
+
+                  if (interimTranscript) {
+                    setStatusText(`${t('voiceAssistant.listening') as string}: ${interimTranscript}`);
+                  }
+
+                  if (finalTranscript) {
+                    setStatusText(`${t('voiceAssistant.recognized') as string}: ${finalTranscript}`);
+                    processVoiceCommand(finalTranscript);
+                  }
+                };
+
+                recognition.onerror = (event) => {
+                  console.error('語音辨識錯誤:', event.error);
+                  setIsListening(false);
+                  isListeningRef.current = false;
+                  if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                    setShowStatus(false);
+                  }
+                  showFeedbackEmoji('❌');
+                };
+
+                recognition.onend = () => {
+                  if (isListeningRef.current) {
+                    setTimeout(() => {
+                      if (recognitionRef.current && isListeningRef.current) {
+                        try {
+                          recognitionRef.current.start();
+                        } catch (error) {
+                          console.error('重新啟動語音辨識失敗:', error);
+                          setIsListening(false);
+                          isListeningRef.current = false;
+                          setShowStatus(false);
+                          showFeedbackEmoji('❌');
+                        }
+                      }
+                    }, 100);
+                  }
+                };
+
+                setIsListening(true);
+                isListeningRef.current = true;
+                setStatusText(t('voiceAssistant.listening') as string);
+                setShowStatus(true);
+                recognition.start();
+              }
+            }
           }, 500);
         }
       } else {
