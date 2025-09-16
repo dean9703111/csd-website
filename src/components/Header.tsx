@@ -148,7 +148,6 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
       const historySection = document.querySelector('#history');
       
       if (heroSection && historySection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
         const historyTop = historySection.getBoundingClientRect().top;
         
         // 如果在 Hero 區塊內，使用深色背景
