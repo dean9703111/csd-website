@@ -360,6 +360,8 @@
     "navigating": "正在導航",
     "startListening": "開始持續語音辨識",
     "stopListening": "停止語音辨識",
-    "helpTitle": "可用的語音指令"
+    "helpTitle": "可用的語音指令",
+    "unknownCommand": "未知指令",
+    "error": "語音辨識錯誤"
   }
 }

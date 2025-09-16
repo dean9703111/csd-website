@@ -360,6 +360,8 @@
     "navigating": "ナビゲーション中",
     "startListening": "継続音声認識を開始",
     "stopListening": "音声認識を停止",
-    "helpTitle": "利用可能な音声コマンド"
+    "helpTitle": "利用可能な音声コマンド",
+    "unknownCommand": "不明なコマンド",
+    "error": "音声認識エラー"
   }
 }

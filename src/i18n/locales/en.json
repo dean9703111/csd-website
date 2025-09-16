@@ -360,6 +360,8 @@
     "navigating": "Navigating",
     "startListening": "Start continuous voice recognition",
     "stopListening": "Stop voice recognition",
-    "helpTitle": "Available voice commands"
+    "helpTitle": "Available voice commands",
+    "unknownCommand": "Unknown command",
+    "error": "Voice recognition error"
   }
 }

@@ -78,6 +78,33 @@ const StatusDisplay = styled.div.attrs<{ $show: boolean }>((props) => ({
   backdrop-filter: blur(10px);
 `;
 
+// 完整指令顯示
+const CommandDisplay = styled.div.attrs<{ $show: boolean }>((props) => ({
+  style: {
+    opacity: props.$show ? 1 : 0,
+    transform: props.$show ? 'translateY(0)' : 'translateY(10px)',
+  },
+}))`
+  position: fixed;
+  bottom: 290px;
+  right: 30px;
+  background: rgba(102, 126, 234, 0.9);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  max-width: 300px;
+  z-index: 1002;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 // 回饋 emoji 顯示
 const FeedbackEmoji = styled.div.attrs<{ $show: boolean }>((props) => ({
   style: {
@@ -144,6 +171,36 @@ const HelpItem = styled.li`
   }
 `;
 
+const LanguageNote = styled.div`
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  font-size: 14px;
+  color: #666;
+  
+  .note-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .language-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .language-item {
+    background: #667eea;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+`;
+
 const CloseButton = styled.button`
   position: absolute;
   top: 15px;
@@ -168,52 +225,147 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
   const [isListening, setIsListening] = useState(false);
   const [statusText, setStatusText] = useState('');
   const [showStatus, setShowStatus] = useState(false);
+  const [commandText, setCommandText] = useState('');
+  const [showCommand, setShowCommand] = useState(false);
+  const [commandEmoji, setCommandEmoji] = useState('');
   const [feedbackEmoji, setFeedbackEmoji] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const isListeningRef = useRef(false);
 
-  // 關鍵字映射
+  // 關鍵字映射 - 擴展更多可理解的指令
   const keywordMap = React.useMemo(() => ({
     'zh-TW': {
+      // 歷史相關
       '發展歷史': 'history',
       '歷史': 'history',
+      '公司歷史': 'history',
+      '發展歷程': 'history',
+      '歷史沿革': 'history',
+      '成立歷史': 'history',
+      
+      // 成就相關
       '中衛成就': 'achievements',
-      '成就': 'achievements', 
+      '成就': 'achievements',
+      '獲獎': 'achievements',
+      '獎項': 'achievements',
+      '榮譽': 'achievements',
+      '成果': 'achievements',
+      '得獎': 'achievements',
+      
+      // 服務相關
       '前瞻服務部': 'forwardService',
       '前瞻服務': 'forwardService',
       '服務': 'forwardService',
+      '服務部': 'forwardService',
+      '業務': 'forwardService',
+      '服務項目': 'forwardService',
+      '服務內容': 'forwardService',
+      
+      // 聯絡相關
       '聯絡洽詢': 'contact',
       '聯絡我們': 'contact',
       '聯絡': 'contact',
+      '洽詢': 'contact',
+      '聯繫': 'contact',
+      '聯繫我們': 'contact',
+      '聯絡方式': 'contact',
+      '電話': 'contact',
+      '地址': 'contact',
+      
+      // 語言切換
       '中文': 'zh-TW',
       '英文': 'en',
-      '日文': 'ja'
+      '日文': 'ja',
+      '繁體中文': 'zh-TW',
+      '英文版': 'en',
+      '日文版': 'ja'
     },
     'en': {
+      // History related
       'development history': 'history',
       'history': 'history',
+      'company history': 'history',
+      'our history': 'history',
+      'historical': 'history',
+      'timeline': 'history',
+      
+      // Achievements related
       'achievements': 'achievements',
+      'awards': 'achievements',
+      'honors': 'achievements',
+      'recognition': 'achievements',
+      'accomplishments': 'achievements',
+      'success': 'achievements',
+      
+      // Service related
       'forward service': 'forwardService',
       'service': 'forwardService',
+      'services': 'forwardService',
+      'department': 'forwardService',
+      'business': 'forwardService',
+      'offerings': 'forwardService',
+      
+      // Contact related
       'contact': 'contact',
+      'contact us': 'contact',
+      'get in touch': 'contact',
+      'reach us': 'contact',
+      'phone': 'contact',
+      'address': 'contact',
+      'location': 'contact',
+      
+      // Language switching
       'chinese': 'zh-TW',
       'english': 'en',
-      'japanese': 'ja'
+      'japanese': 'ja',
+      'chinese version': 'zh-TW',
+      'english version': 'en',
+      'japanese version': 'ja'
     },
     'ja': {
+      // 歴史関連
       '発展歴史': 'history',
       '歴史': 'history',
+      '会社の歴史': 'history',
+      '沿革': 'history',
+      '歴史的': 'history',
+      'タイムライン': 'history',
+      
+      // 成果関連
       '中衛の成果': 'achievements',
       '成果': 'achievements',
+      '受賞': 'achievements',
+      '賞': 'achievements',
+      '栄誉': 'achievements',
+      '実績': 'achievements',
+      '成功': 'achievements',
+      
+      // サービス関連
       '先見サービス部': 'forwardService',
       'サービス': 'forwardService',
+      'サービス部': 'forwardService',
+      '事業': 'forwardService',
+      '業務': 'forwardService',
+      '提供サービス': 'forwardService',
+      
+      // 連絡関連
       '連絡相談': 'contact',
       '連絡': 'contact',
+      'お問い合わせ': 'contact',
+      '連絡先': 'contact',
+      '電話': 'contact',
+      '住所': 'contact',
+      '所在地': 'contact',
+      
+      // 言語切り替え
       '中国語': 'zh-TW',
       '英語': 'en',
-      '日本語': 'ja'
+      '日本語': 'ja',
+      '中国語版': 'zh-TW',
+      '英語版': 'en',
+      '日本語版': 'ja'
     }
   }), []);
 
@@ -246,7 +398,12 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
     if (matchedKeywords >= 1) {
       // 辨識成功 - 關閉幫助彈窗
       setShowHelp(false);
-      showFeedbackEmoji('✅');
+      
+      // 顯示完整指令和成功 emoji
+      setCommandText(matchedKeyword);
+      setCommandEmoji('✅');
+      setShowCommand(true);
+      setTimeout(() => setShowCommand(false), 3000);
       
       if (matchedAction === 'zh-TW' || matchedAction === 'en' || matchedAction === 'ja') {
         // 語言切換
@@ -320,7 +477,10 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                   if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
                     setShowStatus(false);
                   }
-                  showFeedbackEmoji('❌');
+                  setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+                  setCommandEmoji('❌');
+                  setShowCommand(true);
+                  setTimeout(() => setShowCommand(false), 3000);
                 };
 
                 recognition.onend = () => {
@@ -334,7 +494,10 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                           setIsListening(false);
                           isListeningRef.current = false;
                           setShowStatus(false);
-                          showFeedbackEmoji('❌');
+                          setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+                          setCommandEmoji('❌');
+                          setShowCommand(true);
+                          setTimeout(() => setShowCommand(false), 3000);
                         }
                       }
                     }, 100);
@@ -358,8 +521,13 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
     } else {
       // 辨識失敗，顯示幫助
       console.log('沒有匹配到任何關鍵字');
-      showFeedbackEmoji('❓');
-      setTimeout(() => setShowHelp(true), 1000);
+      setCommandText(t('voiceAssistant.unknownCommand') as string || '未知指令');
+      setCommandEmoji('❓');
+      setShowCommand(true);
+      setTimeout(() => {
+        setShowCommand(false);
+        setShowHelp(true);
+      }, 2000);
     }
   }, [i18n, t, onNavigate, keywordMap]);
 
@@ -423,7 +591,10 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
           if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
             setShowStatus(false);
           }
-          showFeedbackEmoji('❌');
+          setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+          setCommandEmoji('❌');
+          setShowCommand(true);
+          setTimeout(() => setShowCommand(false), 3000);
         };
 
         recognition.onend = () => {
@@ -442,7 +613,10 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                   setIsListening(false);
                   isListeningRef.current = false;
                   setShowStatus(false);
-                  showFeedbackEmoji('❌');
+                  setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+                  setCommandEmoji('❌');
+                  setShowCommand(true);
+                  setTimeout(() => setShowCommand(false), 3000);
                 }
               }
             }, 100);
@@ -471,14 +645,28 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
     }
   };
 
-  // 獲取幫助內容
+  // 獲取幫助內容 - 只顯示主要目錄和語言
   const getHelpContent = () => {
     const currentLang = i18n.language as keyof typeof keywordMap;
-    const keywords = keywordMap[currentLang] || keywordMap['zh-TW'];
     
-    return Object.keys(keywords).filter(key => 
-      !['zh-TW', 'en', 'ja'].includes(keywords[key as keyof typeof keywords])
-    );
+    // 只顯示主要目錄項目
+    const mainSections = {
+      'zh-TW': ['發展歷史', '中衛成就', '前瞻服務部', '聯絡洽詢'],
+      'en': ['Development History', 'Achievements', 'Forward Service', 'Contact'],
+      'ja': ['発展歴史', '中衛の成果', '先見サービス部', '連絡相談']
+    };
+    
+    // 支援的語言
+    const supportedLanguages = {
+      'zh-TW': ['中文', '英文', '日文'],
+      'en': ['Chinese', 'English', 'Japanese'],
+      'ja': ['中国語', '英語', '日本語']
+    };
+    
+    return { 
+      mainSections: mainSections[currentLang] || mainSections['zh-TW'],
+      supportedLanguages: supportedLanguages[currentLang] || supportedLanguages['zh-TW']
+    };
   };
 
   return (
@@ -495,6 +683,10 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
         {statusText}
       </StatusDisplay>
 
+      <CommandDisplay $show={showCommand}>
+        {commandEmoji} "{commandText}"
+      </CommandDisplay>
+
       <FeedbackEmoji $show={showFeedback}>
         {feedbackEmoji}
       </FeedbackEmoji>
@@ -504,12 +696,22 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
           <CloseButton onClick={() => setShowHelp(false)}>×</CloseButton>
           <HelpTitle>{t('voiceAssistant.helpTitle') as string}</HelpTitle>
           <HelpList>
-            {getHelpContent().map((keyword, index) => (
+            {getHelpContent().mainSections.map((section, index) => (
               <HelpItem key={index}>
-                💬 "{keyword}"
+                💬 "{section}"
               </HelpItem>
             ))}
           </HelpList>
+          <LanguageNote>
+            <div className="note-title">🌐 支援語言</div>
+            <div className="language-list">
+              {getHelpContent().supportedLanguages.map((language, index) => (
+                <span key={index} className="language-item">
+                  {language}
+                </span>
+              ))}
+            </div>
+          </LanguageNote>
         </HelpContent>
       </HelpModal>
     </>
