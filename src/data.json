@@ -1,0 +1,377 @@
+{
+  "siteInfo": {
+    "title": "財團法人中衛發展中心",
+    "subtitle": "Corporate Synergy Development Center",
+    "description": "建立中衛體系，協助產業升級",
+    "logo": "/img/品牌識別/logo.png",
+    "favicon": "/img/品牌識別/Favicon.jpg"
+  },
+  "history": {
+    "title": "中衛發展歷史",
+    "subtitle": "一個說書人的故事",
+    "description": "這不是一個普通的機構故事，而是一個見證台灣經濟奇蹟、陪伴產業轉型、推動社會進步的傳奇。",
+    "timeline": [
+      {
+        "year": "1984",
+        "title": "中衛小組的誕生",
+        "description": "經濟部工業局成立「中心衛星工廠制度推動小組」，簡稱「中衛小組」。核心理念是「共存共榮」，讓大廠和衛星廠建立相輔相成、共存共榮的合作關係。",
+        "background": "八○年代的台灣，正值工業經濟邁向高科技產業轉型之路，更是經濟起飛的年代。",
+        "color": "#2E8B57"
+      },
+      {
+        "year": "1990",
+        "title": "中衛發展中心的華麗轉身",
+        "description": "改組為「財團法人中衛發展中心」，英文名稱是「Corporate Synergy Development Center」，簡稱CSD。從政府機關的附屬單位，變成具有獨立法人地位的財團法人。",
+        "background": "為了使組織更具彈性，能夠服務更多對象，他們改組為財團法人。",
+        "color": "#4169E1"
+      },
+      {
+        "year": "1995",
+        "title": "亞太營運中心計畫的推動",
+        "description": "行政院正式核定「亞太營運中心計畫」，要將台灣打造成亞太地區的營運中心。中衛發展中心是經濟部的重要執行平台，負責把政府政策轉化為實際的產業行動。",
+        "background": "涵蓋運輸、金融、電信、媒體、貿易與企業營運中心等六大領域。",
+        "color": "#FF6347"
+      },
+      {
+        "year": "2002",
+        "title": "加入WTO與全球化競爭",
+        "description": "台灣正式加入WTO，標誌著台灣經濟完全融入全球體系。中衛發展中心協助企業提升國際競爭力，建立全球供應鏈網絡。",
+        "background": "全球化競爭日益激烈，台灣企業需要更強的國際競爭力。",
+        "color": "#32CD32"
+      },
+      {
+        "year": "2016",
+        "title": "航太A Team的成立",
+        "description": "中衛發展中心協助成立航太A Team，中心廠為漢翔，會員廠247家，推動導入智慧製造合作專案、訂定智慧機台標準、AS 9100擴大參與航太業國機國造。",
+        "background": "2011年德國揭示工業4.0概念，國際市場競爭加劇。",
+        "color": "#9370DB"
+      },
+      {
+        "year": "2021",
+        "title": "智慧低碳雙軸轉型",
+        "description": "中衛發展中心開始推動智慧低碳雙軸轉型，協助家登體系進行智慧減碳，以大帶小10家擴大至38家，邁向減碳1萬噸。",
+        "background": "進入2020年代，永續發展成為全球共識。",
+        "color": "#20B2AA"
+      }
+    ],
+    "currentStats": {
+      "servicePoints": "19+個",
+      "employees": "400+位",
+      "annualVisits": "1.5萬+家次",
+      "costReduction": "6億+元",
+      "revenueIncrease": "33億+元"
+    }
+  },
+  "achievements": {
+    "title": "中衛成就",
+    "subtitle": "用數據說話的實力展現",
+    "description": "這些不是冰冷的統計數字，而是每一個數字背後都代表著無數企業的成長、無數家庭的生計、無數產業的轉型。",
+    "categories": [
+      {
+        "title": "組織規模與服務能量",
+        "icon": "🏢",
+        "stats": [
+          {
+            "label": "創立時間",
+            "value": "1990年",
+            "subtitle": "前身中衛小組1984年"
+          },
+          {
+            "label": "服務據點",
+            "value": "19+個",
+            "subtitle": "遍布全台"
+          },
+          {
+            "label": "員工數",
+            "value": "400+位",
+            "subtitle": "專業人才"
+          },
+          {
+            "label": "服務年資",
+            "value": "30+年",
+            "subtitle": "產業輔導經驗"
+          }
+        ]
+      },
+      {
+        "title": "年度服務量能",
+        "icon": "📊",
+        "stats": [
+          {
+            "label": "每年訪視診斷企業",
+            "value": "1.5萬+家次",
+            "subtitle": "深度診斷服務"
+          },
+          {
+            "label": "每年協助企業降低成本",
+            "value": "6億+元",
+            "subtitle": "成本優化成果"
+          },
+          {
+            "label": "每年協助企業提升營收",
+            "value": "33億+元",
+            "subtitle": "營收成長效益"
+          },
+          {
+            "label": "年度服務效益比",
+            "value": "1:5.5",
+            "subtitle": "投入1元，創造5.5元效益"
+          }
+        ]
+      },
+      {
+        "title": "產業體系建構成果",
+        "icon": "🔗",
+        "stats": [
+          {
+            "label": "產業體系總數",
+            "value": "200+個",
+            "subtitle": "涵蓋多元領域"
+          },
+          {
+            "label": "體系成員總數",
+            "value": "2,400+家企業",
+            "subtitle": "合作夥伴網絡"
+          },
+          {
+            "label": "農業企業化經營",
+            "value": "1,800+家",
+            "subtitle": "農企業輔導"
+          },
+          {
+            "label": "地方產業活化",
+            "value": "6,600+家",
+            "subtitle": "地方創生推動"
+          }
+        ]
+      },
+      {
+        "title": "人才培育與認證成果",
+        "icon": "🎓",
+        "stats": [
+          {
+            "label": "菁英人才培訓",
+            "value": "830,000+人次",
+            "subtitle": "專業人才培育"
+          },
+          {
+            "label": "MIT微笑標章輔導",
+            "value": "2,800+家企業",
+            "subtitle": "品質認證輔導"
+          },
+          {
+            "label": "SBIR創新研發",
+            "value": "1,000+項計畫",
+            "subtitle": "創新研發支持"
+          },
+          {
+            "label": "綠能研發",
+            "value": "300+項技術",
+            "subtitle": "永續技術發展"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "src": "/img/業務、服務展示/上台領獎.png",
+        "alt": "上台領獎",
+        "category": "awards"
+      },
+      {
+        "src": "/img/業務、服務展示/農作成果展示.jpg",
+        "alt": "農作成果展示",
+        "category": "agriculture"
+      },
+      {
+        "src": "/img/業務、服務展示/農業參展.png",
+        "alt": "農業參展",
+        "category": "agriculture"
+      },
+      {
+        "src": "/img/業務、服務展示/農業無人機.jpg",
+        "alt": "農業無人機",
+        "category": "technology"
+      }
+    ]
+  },
+  "forwardService": {
+    "title": "前瞻服務部",
+    "subtitle": "引領未來的創新力量",
+    "description": "前瞻服務部不是一個傳統的業務部門，而是一個跨域整合的創新平台。我們站在時代的十字路口，用前瞻的眼光、創新的思維、專業的能力，為台灣的未來發展開創新的道路。",
+    "vision": {
+      "title": "核心願景",
+      "content": "前瞻創新，邁向未來",
+      "description": "我們要成為台灣產業轉型的引領者，社會發展的推動者，未來趨勢的開創者。"
+    },
+    "positioning": {
+      "title": "部門定位",
+      "content": "跨域整合的創新平台",
+      "description": "我們始終堅持「以客戶為中心」的服務理念，用創新的思維和專業的能力，為客戶創造最大的價值。"
+    },
+    "businessScope": {
+      "title": "業務範疇",
+      "categories": [
+        {
+          "title": "農業領域",
+          "icon": "🌾",
+          "services": [
+            "科技農企業輔導",
+            "產銷履歷擴大推動",
+            "農機代耕團專案輔導",
+            "青農創生地產地消"
+          ]
+        },
+        {
+          "title": "健康照護領域",
+          "icon": "🏥",
+          "services": [
+            "健康及長照推動服務",
+            "運動健康科技應用",
+            "高齡科技產業智權布局"
+          ]
+        },
+        {
+          "title": "智慧財產領域",
+          "icon": "💡",
+          "services": [
+            "智慧財產推廣服務",
+            "專利檢索及布局競賽",
+            "產業智權輔導"
+          ]
+        },
+        {
+          "title": "原住民族產業",
+          "icon": "🏛️",
+          "services": [
+            "原住民族商品通路經營",
+            "部落產業升級計畫專案管理"
+          ]
+        },
+        {
+          "title": "永續發展領域",
+          "icon": "🌱",
+          "services": [
+            "淨零公正轉型",
+            "環境永續發展",
+            "循環經濟推動"
+          ]
+        }
+      ]
+    },
+    "coreCapabilities": {
+      "title": "核心能力",
+      "capabilities": [
+        {
+          "title": "數位轉型能力",
+          "icon": "💻",
+          "description": "智慧農業4.0技術應用、物聯網系統建置、大數據分析與應用、人工智慧技術導入"
+        },
+        {
+          "title": "永續精實能力",
+          "icon": "♻️",
+          "description": "碳足跡管理與減碳輔導、循環經濟模式設計、ESG策略規劃與執行、綠色供應鏈建置"
+        },
+        {
+          "title": "跨域整合能力",
+          "icon": "🔗",
+          "description": "農業+科技整合、健康+科技整合、文化+商業整合、永續+產業整合"
+        },
+        {
+          "title": "國際化能力",
+          "icon": "🌍",
+          "description": "國際市場拓展、跨國供應鏈建置、國際認證輔導、海外通路開發"
+        }
+      ]
+    },
+    "successCases": [
+      {
+        "title": "青木堂合作社的國際化轉型",
+        "description": "導入IoT技術，活化水上鄉荒廢土地利用超過20公頃，與日商茂華株式會社、福和生鮮簽署貿易合作備忘錄，預計海外營收可連續3年年均複合成長率10%。",
+        "image": "/img/業務、服務展示/農作成果展示.jpg",
+        "tags": ["農業", "國際化", "IoT技術"]
+      },
+      {
+        "title": "鮮綠農產科技的智慧農業轉型",
+        "description": "建立田間栽培管理標準化，導入物聯網技術進行田間監控，契作近700公頃玉米農田，成功與國外大型貿易集團洽談合作。",
+        "image": "/img/業務、服務展示/農業無人機.jpg",
+        "tags": ["智慧農業", "物聯網", "國際合作"]
+      },
+      {
+        "title": "LiMA原住民族商品通路品牌建立",
+        "description": "162家上架業者，約2000個商品品項，建立完整的虛實整合通路網絡，成功拓展國際市場。",
+        "image": "/img/業務、服務展示/園遊會.jpg",
+        "tags": ["原民產業", "電商", "品牌建立"]
+      }
+    ],
+    "images": [
+      {
+        "src": "/img/業務、服務展示/農作成果展示2.jpg",
+        "alt": "農作成果展示",
+        "category": "achievement"
+      },
+      {
+        "src": "/img/人物與情境/員工合影.png",
+        "alt": "員工合影",
+        "category": "team"
+      },
+      {
+        "src": "/img/活動媒體/營隊.jpg",
+        "alt": "營隊活動",
+        "category": "activity"
+      },
+      {
+        "src": "/img/人物與情境/合影圖卡.jpg",
+        "alt": "團隊合影",
+        "category": "team"
+      }
+    ]
+  },
+  "contact": {
+    "title": "聯絡洽詢",
+    "subtitle": "與我們一起創造未來",
+    "description": "如果您對我們的服務有興趣，或希望了解更多資訊，歡迎與我們聯絡。我們將竭誠為您提供專業的諮詢服務。",
+    "info": {
+      "organization": "財團法人中衛發展中心",
+      "englishName": "Corporate Synergy Development Center",
+      "address": "台北市信義區信義路五段7號",
+      "phone": "+886-2-2345-6789",
+      "email": "info@csd.org.tw",
+      "website": "https://www.csd.org.tw"
+    },
+    "departments": [
+      {
+        "name": "前瞻服務部",
+        "phone": "+886-2-2345-6790",
+        "email": "forward@csd.org.tw"
+      },
+      {
+        "name": "製造業服務部",
+        "phone": "+886-2-2345-6791",
+        "email": "manufacturing@csd.org.tw"
+      },
+      {
+        "name": "農業服務部",
+        "phone": "+886-2-2345-6792",
+        "email": "agriculture@csd.org.tw"
+      }
+    ],
+    "socialMedia": [
+      {
+        "platform": "Facebook",
+        "url": "https://www.facebook.com/csd.org.tw",
+        "icon": "📘"
+      },
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/company/csd-org-tw",
+        "icon": "💼"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/c/csdorgtw",
+        "icon": "📺"
+      }
+    ]
+  }
+}
