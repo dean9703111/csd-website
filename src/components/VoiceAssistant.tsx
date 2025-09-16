@@ -105,21 +105,6 @@ const CommandDisplay = styled.div.attrs<{ $show: boolean }>((props) => ({
   gap: 8px;
 `;
 
-// 回饋 emoji 顯示
-const FeedbackEmoji = styled.div.attrs<{ $show: boolean }>((props) => ({
-  style: {
-    opacity: props.$show ? 1 : 0,
-    transform: props.$show ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(20px)',
-  },
-}))`
-  position: fixed;
-  bottom: 290px;
-  right: 30px;
-  font-size: 50px;
-  z-index: 1002;
-  transition: all 0.3s ease;
-  pointer-events: none;
-`;
 
 // 幫助彈窗
 const HelpModal = styled.div<{ $show: boolean }>`
@@ -228,8 +213,6 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
   const [commandText, setCommandText] = useState('');
   const [showCommand, setShowCommand] = useState(false);
   const [commandEmoji, setCommandEmoji] = useState('');
-  const [feedbackEmoji, setFeedbackEmoji] = useState('');
-  const [showFeedback, setShowFeedback] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const isListeningRef = useRef(false);
@@ -471,16 +454,32 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                 };
 
                 recognition.onerror = (event) => {
-                  console.error('語音辨識錯誤:', event.error);
+                  // 先設定狀態，避免重複設定
                   setIsListening(false);
                   isListeningRef.current = false;
+                  
+                  if (event.error === 'aborted') {
+                    // aborted 錯誤是正常的中斷，不記錄為錯誤
+                    console.log('語音辨識被中斷');
+                    return;
+                  }
+                  
+                  // 其他錯誤才記錄和顯示
+                  console.error('語音辨識錯誤:', event.error);
+                  
                   if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
                     setShowStatus(false);
+                    setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+                    setCommandEmoji('❌');
+                    setShowCommand(true);
+                    setTimeout(() => setShowCommand(false), 3000);
+                  } else {
+                    // 其他錯誤顯示錯誤訊息
+                    setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+                    setCommandEmoji('❌');
+                    setShowCommand(true);
+                    setTimeout(() => setShowCommand(false), 3000);
                   }
-                  setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
-                  setCommandEmoji('❌');
-                  setShowCommand(true);
-                  setTimeout(() => setShowCommand(false), 3000);
                 };
 
                 recognition.onend = () => {
@@ -494,6 +493,7 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                           setIsListening(false);
                           isListeningRef.current = false;
                           setShowStatus(false);
+                          // 重新啟動失敗時顯示錯誤訊息
                           setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
                           setCommandEmoji('❌');
                           setShowCommand(true);
@@ -533,12 +533,6 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
 
 
 
-  // 顯示回饋 emoji
-  const showFeedbackEmoji = (emoji: string) => {
-    setFeedbackEmoji(emoji);
-    setShowFeedback(true);
-    setTimeout(() => setShowFeedback(false), 2000);
-  };
 
   // 開始語音辨識
   const startListening = () => {
@@ -584,17 +578,32 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
         };
 
         recognition.onerror = (event) => {
-          console.error('語音辨識錯誤:', event.error);
+          // 先設定狀態，避免重複設定
           setIsListening(false);
           isListeningRef.current = false;
-          // 只有在嚴重錯誤時才隱藏狀態框，不要因為重新啟動失敗就隱藏
+          
+          if (event.error === 'aborted') {
+            // aborted 錯誤是正常的中斷，不記錄為錯誤
+            console.log('語音辨識被中斷');
+            return;
+          }
+          
+          // 其他錯誤才記錄和顯示
+          console.error('語音辨識錯誤:', event.error);
+          
           if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
             setShowStatus(false);
+            setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+            setCommandEmoji('❌');
+            setShowCommand(true);
+            setTimeout(() => setShowCommand(false), 3000);
+          } else {
+            // 其他錯誤顯示錯誤訊息
+            setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
+            setCommandEmoji('❌');
+            setShowCommand(true);
+            setTimeout(() => setShowCommand(false), 3000);
           }
-          setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
-          setCommandEmoji('❌');
-          setShowCommand(true);
-          setTimeout(() => setShowCommand(false), 3000);
         };
 
         recognition.onend = () => {
@@ -613,6 +622,7 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
                   setIsListening(false);
                   isListeningRef.current = false;
                   setShowStatus(false);
+                  // 重新啟動失敗時顯示錯誤訊息
                   setCommandText(t('voiceAssistant.error') as string || '語音辨識錯誤');
                   setCommandEmoji('❌');
                   setShowCommand(true);
@@ -638,10 +648,17 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
   // 停止語音辨識
   const stopListening = () => {
     if (recognitionRef.current && isListening) {
-      setIsListening(false);
+      // 先設定標記，避免 onerror 和 onend 事件重新啟動
       isListeningRef.current = false;
+      setIsListening(false);
       setShowStatus(false); // 立即隱藏狀態顯示
-      recognitionRef.current.stop();
+      
+      try {
+        recognitionRef.current.stop();
+      } catch (error) {
+        // 忽略停止時的錯誤
+        console.log('停止語音辨識時發生錯誤:', error);
+      }
     }
   };
 
@@ -687,9 +704,6 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
         {commandEmoji} "{commandText}"
       </CommandDisplay>
 
-      <FeedbackEmoji $show={showFeedback}>
-        {feedbackEmoji}
-      </FeedbackEmoji>
 
       <HelpModal $show={showHelp} onClick={() => setShowHelp(false)}>
         <HelpContent onClick={(e) => e.stopPropagation()}>
