@@ -1,61 +1,59 @@
-name: Build & Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]   # 你主要開發的分支
-  workflow_dispatch:      # 手動觸發
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
+# 設定 GITHUB_TOKEN 權限
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# 確保一次只有一個部署在運行
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'         # 若你用 yarn/pnpm，改成 yarn 或 pnpm
-
-      - name: Install deps
-        run: npm ci            # 若沒有 package-lock.json，改用: npm install
-
-      - name: Build
-        run: npm run build
-
-      # 如果是 Vite，build 產物在 dist；如果是 CRA，產物在 build。
-      # ↓ 把此環節換成對應資料夾即可。
-      - name: Prepare SPA 404 fallback
-        run: |
-          OUT_DIR="build"      # CRA=build；Vite=dist
-          if [ -d "$OUT_DIR" ]; then
-            cp "$OUT_DIR/index.html" "$OUT_DIR/404.html"
-          else
-            echo "Output dir not found"; exit 1
-          fi
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build          # Vite 請改成 dist
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build
+      run: npm run build
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './build'
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
