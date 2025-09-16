@@ -3,8 +3,8 @@
     "title": "財團法人中衛發展中心",
     "subtitle": "Corporate Synergy Development Center",
     "description": "建立中衛體系，協助產業升級",
-    "logo": "/img/品牌識別/logo.png",
-    "favicon": "/img/品牌識別/Favicon.jpg"
+    "logo": "./img/品牌識別/logo.png",
+    "favicon": "./img/品牌識別/Favicon.jpg"
   },
   "history": {
     "title": "中衛發展歷史",
@@ -174,22 +174,22 @@
     ],
     "images": [
       {
-        "src": "/img/業務、服務展示/上台領獎.png",
+        "src": "./img/業務、服務展示/上台領獎.png",
         "alt": "上台領獎",
         "category": "awards"
       },
       {
-        "src": "/img/業務、服務展示/農作成果展示.jpg",
+        "src": "./img/業務、服務展示/農作成果展示.jpg",
         "alt": "農作成果展示",
         "category": "agriculture"
       },
       {
-        "src": "/img/業務、服務展示/農業參展.png",
+        "src": "./img/業務、服務展示/農業參展.png",
         "alt": "農業參展",
         "category": "agriculture"
       },
       {
-        "src": "/img/業務、服務展示/農業無人機.jpg",
+        "src": "./img/業務、服務展示/農業無人機.jpg",
         "alt": "農業無人機",
         "category": "technology"
       }
@@ -288,40 +288,40 @@
       {
         "title": "青木堂合作社的國際化轉型",
         "description": "導入IoT技術，活化水上鄉荒廢土地利用超過20公頃，與日商茂華株式會社、福和生鮮簽署貿易合作備忘錄，預計海外營收可連續3年年均複合成長率10%。",
-        "image": "/img/業務、服務展示/農作成果展示.jpg",
+        "image": "./img/業務、服務展示/農作成果展示.jpg",
         "tags": ["農業", "國際化", "IoT技術"]
       },
       {
         "title": "鮮綠農產科技的智慧農業轉型",
         "description": "建立田間栽培管理標準化，導入物聯網技術進行田間監控，契作近700公頃玉米農田，成功與國外大型貿易集團洽談合作。",
-        "image": "/img/業務、服務展示/農業無人機.jpg",
+        "image": "./img/業務、服務展示/農業無人機.jpg",
         "tags": ["智慧農業", "物聯網", "國際合作"]
       },
       {
         "title": "LiMA原住民族商品通路品牌建立",
         "description": "162家上架業者，約2000個商品品項，建立完整的虛實整合通路網絡，成功拓展國際市場。",
-        "image": "/img/業務、服務展示/園遊會.jpg",
+        "image": "./img/業務、服務展示/園遊會.jpg",
         "tags": ["原民產業", "電商", "品牌建立"]
       }
     ],
     "images": [
       {
-        "src": "/img/業務、服務展示/農作成果展示2.jpg",
+        "src": "./img/業務、服務展示/農作成果展示2.jpg",
         "alt": "農作成果展示",
         "category": "achievement"
       },
       {
-        "src": "/img/人物與情境/員工合影.png",
+        "src": "./img/人物與情境/員工合影.png",
         "alt": "員工合影",
         "category": "team"
       },
       {
-        "src": "/img/活動媒體/營隊.jpg",
+        "src": "./img/活動媒體/營隊.jpg",
         "alt": "營隊活動",
         "category": "activity"
       },
       {
-        "src": "/img/人物與情境/合影圖卡.jpg",
+        "src": "./img/人物與情境/合影圖卡.jpg",
         "alt": "團隊合影",
         "category": "team"
       }
