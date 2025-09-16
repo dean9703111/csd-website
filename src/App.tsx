@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GlobalStyle } from './styles/GlobalStyles';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -8,8 +9,10 @@ import ForwardServiceSection from './components/ForwardServiceSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import data from './data.json';
+import './i18n';
 
 function App() {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ function App() {
             animation: 'spin 1s linear infinite',
             margin: '0 auto 1rem'
           }}></div>
-          <p>載入中...</p>
+          <p>{t('common.loading')}</p>
         </div>
         <style>{`
           @keyframes spin {

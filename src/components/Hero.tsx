@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useParallax } from '../hooks/useScrollAnimation';
 
 const HeroContainer = styled.section`
@@ -137,6 +138,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ data }) => {
+  const { t } = useTranslation();
   const parallaxOffset = useParallax(0.5);
 
   const scrollToNext = () => {
@@ -147,7 +149,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
   };
 
   return (
-    <HeroContainer>
+    <HeroContainer id="hero">
       <BackgroundImage offset={parallaxOffset} />
       <Overlay />
       
@@ -161,7 +163,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          {data.siteInfo.title}
+          {t('siteInfo.title')}
         </Title>
         
         <Subtitle
@@ -169,7 +171,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          {data.siteInfo.subtitle}
+          {t('siteInfo.subtitle')}
         </Subtitle>
         
         <Description
@@ -177,7 +179,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          {data.siteInfo.description}
+          {t('siteInfo.description')}
         </Description>
         
         <CTAButton
@@ -188,7 +190,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           whileTap={{ scale: 0.95 }}
           onClick={scrollToNext}
         >
-          探索我們的服務
+          {t('common.exploreServices')}
         </CTAButton>
       </Content>
 
@@ -198,7 +200,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
         transition={{ duration: 0.5, delay: 2 }}
         onClick={scrollToNext}
       >
-        <div className="scroll-text">向下滾動</div>
+        <div className="scroll-text">{t('common.scrollDown')}</div>
         <div className="scroll-arrow"></div>
       </ScrollIndicator>
     </HeroContainer>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const ForwardServiceContainer = styled.section`
@@ -221,6 +222,7 @@ const VisionCardWithAnimation: React.FC<{ children: React.ReactNode }> = ({ chil
 };
 
 const BusinessScopeWithAnimation: React.FC<{ data: any }> = ({ data }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -231,7 +233,7 @@ const BusinessScopeWithAnimation: React.FC<{ data: any }> = ({ data }) => {
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <h3 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-        {data.title}
+        {t('forwardService.businessScope.title')}
       </h3>
       <BusinessScopeGrid>
         {data.categories.map((category: any, index: number) => (
@@ -243,10 +245,10 @@ const BusinessScopeWithAnimation: React.FC<{ data: any }> = ({ data }) => {
             whileHover={{ scale: 1.02 }}
           >
             <BusinessIcon>{category.icon}</BusinessIcon>
-            <BusinessTitle>{category.title}</BusinessTitle>
+            <BusinessTitle>{t(`forwardService.businessScope.categories.${index}.title`)}</BusinessTitle>
             <ServiceList>
               {category.services.map((service: string, serviceIndex: number) => (
-                <ServiceItem key={serviceIndex}>{service}</ServiceItem>
+                <ServiceItem key={serviceIndex}>{t(`forwardService.businessScope.categories.${index}.services.${serviceIndex}`)}</ServiceItem>
               ))}
             </ServiceList>
           </BusinessCard>
@@ -257,6 +259,7 @@ const BusinessScopeWithAnimation: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const CapabilitiesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -267,7 +270,7 @@ const CapabilitiesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
         transition={{ duration: 0.8 }}
         style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}
       >
-        {data.title}
+        {t('forwardService.coreCapabilities.title')}
       </motion.h3>
       <CapabilitiesGrid>
         {data.capabilities.map((capability: any, index: number) => (
@@ -279,8 +282,8 @@ const CapabilitiesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
             whileHover={{ scale: 1.05 }}
           >
             <CapabilityIcon>{capability.icon}</CapabilityIcon>
-            <CapabilityTitle>{capability.title}</CapabilityTitle>
-            <CapabilityDescription>{capability.description}</CapabilityDescription>
+            <CapabilityTitle>{t(`forwardService.coreCapabilities.capabilities.${index}.title`)}</CapabilityTitle>
+            <CapabilityDescription>{t(`forwardService.coreCapabilities.capabilities.${index}.description`)}</CapabilityDescription>
           </CapabilityCard>
         ))}
       </CapabilitiesGrid>
@@ -289,6 +292,7 @@ const CapabilitiesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const SuccessCasesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -299,7 +303,7 @@ const SuccessCasesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
         transition={{ duration: 0.8 }}
         style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}
       >
-        成功案例分享
+{t('forwardService.successCasesTitle')}
       </motion.h3>
       <CasesGrid>
         {data.map((caseItem: any, index: number) => (
@@ -312,11 +316,11 @@ const SuccessCasesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
           >
             <CaseImage src={caseItem.image} alt={caseItem.title} />
             <CaseContent>
-              <CaseTitle>{caseItem.title}</CaseTitle>
-              <CaseDescription>{caseItem.description}</CaseDescription>
+              <CaseTitle>{t(`forwardService.successCases.${index}.title`)}</CaseTitle>
+              <CaseDescription>{t(`forwardService.successCases.${index}.description`)}</CaseDescription>
               <CaseTags>
                 {caseItem.tags.map((tag: string, tagIndex: number) => (
-                  <Tag key={tagIndex}>{tag}</Tag>
+                  <Tag key={tagIndex}>{t(`forwardService.successCases.${index}.tags.${tagIndex}`)}</Tag>
                 ))}
               </CaseTags>
             </CaseContent>
@@ -328,6 +332,7 @@ const SuccessCasesWithAnimation: React.FC<{ data: any }> = ({ data }) => {
 };
 
 const TeamGalleryWithAnimation: React.FC<{ data: any; onImageClick: (src: string) => void }> = ({ data, onImageClick }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -338,7 +343,7 @@ const TeamGalleryWithAnimation: React.FC<{ data: any; onImageClick: (src: string
       transition={{ duration: 0.8 }}
     >
       <h3 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-        團隊風采
+        {t('forwardService.teamGallery')}
       </h3>
       <ImageGallery>
         {data.map((image: any, index: number) => (
@@ -362,6 +367,7 @@ interface ForwardServiceSectionProps {
 }
 
 const ForwardServiceSection: React.FC<ForwardServiceSectionProps> = ({ data }) => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
@@ -374,17 +380,17 @@ const ForwardServiceSection: React.FC<ForwardServiceSectionProps> = ({ data }) =
           style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>
-            {data.forwardService.title}
+            {t('forwardService.title')}
           </h2>
           <p style={{ fontSize: '1.2rem', opacity: 0.9 }}>
-            {data.forwardService.description}
+            {t('forwardService.description')}
           </p>
         </motion.div>
 
         <VisionCardWithAnimation>
-          <VisionTitle>{data.forwardService.vision.title}</VisionTitle>
-          <VisionContent>{data.forwardService.vision.content}</VisionContent>
-          <VisionDescription>{data.forwardService.vision.description}</VisionDescription>
+          <VisionTitle>{t('forwardService.vision.title')}</VisionTitle>
+          <VisionContent>{t('forwardService.vision.content')}</VisionContent>
+          <VisionDescription>{t('forwardService.vision.description')}</VisionDescription>
         </VisionCardWithAnimation>
 
         <BusinessScopeWithAnimation data={data.forwardService.businessScope} />

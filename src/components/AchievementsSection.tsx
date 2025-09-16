@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const AchievementsContainer = styled.section`
@@ -96,6 +97,7 @@ interface AchievementsSectionProps {
 }
 
 const AchievementsSection: React.FC<AchievementsSectionProps> = ({ data }) => {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState(0);
   const [ref, isVisible] = useScrollAnimation(0.1);
 
@@ -111,10 +113,10 @@ const AchievementsSection: React.FC<AchievementsSectionProps> = ({ data }) => {
           style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#2c3e50' }}>
-            {data.achievements.title}
+            {t('achievements.title')}
           </h2>
           <p style={{ fontSize: '1.2rem', color: '#7f8c8d' }}>
-            {data.achievements.description}
+            {t('achievements.description')}
           </p>
         </motion.div>
 
@@ -126,7 +128,7 @@ const AchievementsSection: React.FC<AchievementsSectionProps> = ({ data }) => {
               onClick={() => setActiveCategory(index)}
             >
               <span>{category.icon}</span>
-              {category.title}
+              {t(`achievements.categories.${index}.title`)}
             </TabButton>
           ))}
         </CategoryTabs>
@@ -149,9 +151,9 @@ const AchievementsSection: React.FC<AchievementsSectionProps> = ({ data }) => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <StatValue>{stat.value}</StatValue>
-                    <StatLabel>{stat.label}</StatLabel>
-                    <StatSubtitle>{stat.subtitle}</StatSubtitle>
+                    <StatValue>{t(`achievements.categories.${activeCategory}.stats.${index}.value`)}</StatValue>
+                    <StatLabel>{t(`achievements.categories.${activeCategory}.stats.${index}.label`)}</StatLabel>
+                    <StatSubtitle>{t(`achievements.categories.${activeCategory}.stats.${index}.subtitle`)}</StatSubtitle>
                   </StatCard>
                 ))}
               </StatsGrid>

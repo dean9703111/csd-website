@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 const FooterContainer = styled.footer`
   background: #2c3e50;
@@ -148,6 +149,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ data }) => {
+  const { t } = useTranslation();
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -164,11 +166,11 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
               <LogoSection>
                 <img src={data.siteInfo.logo} alt="中衛發展中心" />
                 <LogoText>
-                  <h3>{data.siteInfo.title}</h3>
-                  <p>{data.siteInfo.subtitle}</p>
+                  <h3>{t('siteInfo.title')}</h3>
+                  <p>{t('siteInfo.subtitle')}</p>
                 </LogoText>
               </LogoSection>
-              <p>{data.siteInfo.description}</p>
+              <p>{t('siteInfo.description')}</p>
               <SocialLinks>
                 {data.contact.socialMedia.map((social: any, index: number) => (
                   <SocialLink key={index} href={social.url} target="_blank" rel="noopener noreferrer">
@@ -179,37 +181,37 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             </FooterSection>
 
             <FooterSection>
-              <h4>服務領域</h4>
+              <h4>{t('footer.serviceAreas')}</h4>
               <ul>
-                <li><a href="#forward-service">前瞻服務部</a></li>
-                <li><a href="#achievements">產業體系建構</a></li>
-                <li><a href="#achievements">人才培育</a></li>
-                <li><a href="#achievements">創新研發</a></li>
+                <li><a href="#forward-service">{t('footer.forwardService')}</a></li>
+                <li><a href="#achievements">{t('footer.industrySystem')}</a></li>
+                <li><a href="#achievements">{t('footer.talentTraining')}</a></li>
+                <li><a href="#achievements">{t('footer.innovationR&D')}</a></li>
               </ul>
             </FooterSection>
 
             <FooterSection>
-              <h4>聯絡資訊</h4>
-              <p>📍 {data.contact.info.address}</p>
-              <p>📞 {data.contact.info.phone}</p>
-              <p>✉️ {data.contact.info.email}</p>
-              <p>🌐 {data.contact.info.website}</p>
+              <h4>{t('contact.contactInfo')}</h4>
+              <p>📍 {t('contact.info.address')}</p>
+              <p>📞 {t('contact.info.phone')}</p>
+              <p>✉️ {t('contact.email')}</p>
+              <p>🌐 {t('contact.website')}</p>
             </FooterSection>
 
             <FooterSection>
-              <h4>快速連結</h4>
+              <h4>{t('footer.quickLinks')}</h4>
               <ul>
-                <li><a href="#history">發展歷史</a></li>
-                <li><a href="#achievements">中衛成就</a></li>
-                <li><a href="#forward-service">前瞻服務部</a></li>
-                <li><a href="#contact">聯絡洽詢</a></li>
+                <li><a href="#history">{t('footer.developmentHistory')}</a></li>
+                <li><a href="#achievements">{t('footer.csdAchievements')}</a></li>
+                <li><a href="#forward-service">{t('footer.forwardService')}</a></li>
+                <li><a href="#contact">{t('footer.contactInquiry')}</a></li>
               </ul>
             </FooterSection>
           </FooterTop>
 
           <FooterBottom>
-            <p>&copy; 2024 財團法人中衛發展中心. 版權所有.</p>
-            <p>Corporate Synergy Development Center. All rights reserved.</p>
+            <p>&copy; 2024 {t('siteInfo.title')}. {t('footer.copyright')}.</p>
+            <p>{t('siteInfo.subtitle')}. {t('footer.allRightsReserved')}</p>
           </FooterBottom>
         </FooterContent>
       </FooterContainer>

@@ -1,0 +1,356 @@
+{
+  "siteInfo": {
+    "title": "Corporate Synergy Development Center",
+    "subtitle": "Corporate Synergy Development Center",
+    "description": "Building CSD System, Assisting Industry Upgrading"
+  },
+  "navigation": {
+    "home": "Home",
+    "history": "History",
+    "achievements": "Achievements",
+    "services": "Forward Services",
+    "contact": "Contact"
+  },
+  "common": {
+    "loading": "Loading...",
+    "readMore": "Read More",
+    "contactUs": "Contact Us",
+    "learnMore": "Learn More",
+    "scrollDown": "Scroll Down",
+    "exploreServices": "Explore Our Services"
+  },
+  "history": {
+    "title": "CSD Development History",
+    "subtitle": "A Storyteller's Tale",
+    "description": "This is not an ordinary institutional story, but a legend that witnessed Taiwan's economic miracle, accompanied industrial transformation, and promoted social progress.",
+    "timeline": [
+      {
+        "year": "1984",
+        "title": "Birth of CSD Group",
+        "description": "The Industrial Development Bureau of the Ministry of Economic Affairs established the 'Center-Satellite Factory System Promotion Group', abbreviated as 'CSD Group'. The core concept is 'coexistence and co-prosperity', allowing large factories and satellite factories to establish complementary and mutually beneficial cooperative relationships.",
+        "background": "In the 1980s, Taiwan was in the transition from industrial economy to high-tech industry, and it was an era of economic takeoff."
+      },
+      {
+        "year": "1990",
+        "title": "CSD Center's Glorious Transformation",
+        "description": "Reorganized into 'Corporate Synergy Development Center', with the English name 'Corporate Synergy Development Center', abbreviated as CSD. From a government agency subsidiary to an independent legal entity foundation.",
+        "background": "To make the organization more flexible and able to serve more targets, they reorganized into a foundation."
+      },
+      {
+        "year": "1995",
+        "title": "Promotion of Asia-Pacific Operations Center Plan",
+        "description": "The Executive Yuan officially approved the 'Asia-Pacific Operations Center Plan' to make Taiwan an operations center in the Asia-Pacific region. CSD Center is an important implementation platform of the Ministry of Economic Affairs, responsible for transforming government policies into actual industrial actions.",
+        "background": "Covering six major areas: transportation, finance, telecommunications, media, trade and corporate operations centers."
+      },
+      {
+        "year": "2002",
+        "title": "WTO Accession and Global Competition",
+        "description": "Taiwan officially joined the WTO, marking Taiwan's complete integration into the global system. CSD Center assists enterprises in enhancing international competitiveness and building global supply chain networks.",
+        "background": "Global competition is becoming increasingly fierce, and Taiwanese enterprises need stronger international competitiveness."
+      },
+      {
+        "year": "2016",
+        "title": "Establishment of Aerospace A Team",
+        "description": "CSD Center assisted in establishing the Aerospace A Team, with the center factory being AIDC and 247 member factories, promoting the introduction of smart manufacturing cooperation projects, setting smart machine standards, and expanding AS 9100 participation in aerospace industry domestic aircraft manufacturing.",
+        "background": "In 2011, Germany revealed the Industry 4.0 concept, and international market competition intensified."
+      },
+      {
+        "year": "2021",
+        "title": "Smart Low-Carbon Dual-Axis Transformation",
+        "description": "CSD Center began promoting smart low-carbon dual-axis transformation, assisting the Gudeng system in smart carbon reduction, expanding from 10 to 38 companies with large companies leading small ones, moving towards 10,000 tons of carbon reduction.",
+        "background": "Entering the 2020s, sustainable development has become a global consensus."
+      }
+    ],
+    "currentStats": {
+      "servicePoints": "19+",
+      "employees": "400+",
+      "annualVisits": "15,000+ visits",
+      "costReduction": "600M+ NTD",
+      "revenueIncrease": "3.3B+ NTD"
+    },
+    "statsLabels": {
+      "servicePoints": "Service Points",
+      "employees": "Professional Talents",
+      "annualVisits": "Annual Enterprise Visits",
+      "costReduction": "Cost Reduction Assistance",
+      "revenueIncrease": "Revenue Increase Assistance"
+    },
+    "currentTitle": "Today's CSD Center"
+  },
+  "achievements": {
+    "title": "CSD Achievements",
+    "subtitle": "Strength Demonstrated by Data",
+    "description": "These are not cold statistical numbers, but every number behind represents the growth of countless enterprises, the livelihood of countless families, and the transformation of countless industries.",
+    "categories": [
+      {
+        "title": "Organizational Scale and Service Capacity",
+        "stats": [
+          {
+            "label": "Founded",
+            "value": "1990",
+            "subtitle": "Predecessor CSD Group 1984"
+          },
+          {
+            "label": "Service Points",
+            "value": "19+",
+            "subtitle": "Throughout Taiwan"
+          },
+          {
+            "label": "Employees",
+            "value": "400+",
+            "subtitle": "Professional Talents"
+          },
+          {
+            "label": "Service Years",
+            "value": "30+ years",
+            "subtitle": "Industry Consulting Experience"
+          }
+        ]
+      },
+      {
+        "title": "Annual Service Capacity",
+        "stats": [
+          {
+            "label": "Annual Enterprise Visits",
+            "value": "15,000+ visits",
+            "subtitle": "In-depth Diagnostic Services"
+          },
+          {
+            "label": "Annual Cost Reduction Assistance",
+            "value": "600M+ NTD",
+            "subtitle": "Cost Optimization Results"
+          },
+          {
+            "label": "Annual Revenue Increase Assistance",
+            "value": "3.3B+ NTD",
+            "subtitle": "Revenue Growth Benefits"
+          },
+          {
+            "label": "Annual Service Benefit Ratio",
+            "value": "1:5.5",
+            "subtitle": "1 NTD input creates 5.5 NTD benefit"
+          }
+        ]
+      },
+      {
+        "title": "Industrial System Construction Results",
+        "stats": [
+          {
+            "label": "Total Industrial Systems",
+            "value": "200+",
+            "subtitle": "Covering Multiple Fields"
+          },
+          {
+            "label": "Total System Members",
+            "value": "2,400+ enterprises",
+            "subtitle": "Partner Network"
+          },
+          {
+            "label": "Agricultural Enterprise Operations",
+            "value": "1,800+",
+            "subtitle": "Agricultural Enterprise Consulting"
+          },
+          {
+            "label": "Local Industry Revitalization",
+            "value": "6,600+",
+            "subtitle": "Local Creation Promotion"
+          }
+        ]
+      },
+      {
+        "title": "Talent Training and Certification Results",
+        "stats": [
+          {
+            "label": "Elite Talent Training",
+            "value": "830,000+ person-times",
+            "subtitle": "Professional Talent Development"
+          },
+          {
+            "label": "MIT Smile Label Consulting",
+            "value": "2,800+ enterprises",
+            "subtitle": "Quality Certification Consulting"
+          },
+          {
+            "label": "SBIR Innovation R&D",
+            "value": "1,000+ projects",
+            "subtitle": "Innovation R&D Support"
+          },
+          {
+            "label": "Green Energy R&D",
+            "value": "300+ technologies",
+            "subtitle": "Sustainable Technology Development"
+          }
+        ]
+      }
+    ]
+  },
+  "forwardService": {
+    "title": "Forward Service Department",
+    "subtitle": "Innovative Force Leading the Future",
+    "description": "The Forward Service Department is not a traditional business department, but a cross-domain integrated innovation platform. We stand at the crossroads of the times, using forward-looking vision, innovative thinking, and professional capabilities to create new paths for Taiwan's future development.",
+    "vision": {
+      "title": "Core Vision",
+      "content": "Forward Innovation, Towards the Future",
+      "description": "We want to become the leader of Taiwan's industrial transformation, the promoter of social development, and the creator of future trends."
+    },
+    "positioning": {
+      "title": "Department Positioning",
+      "content": "Cross-domain Integrated Innovation Platform",
+      "description": "We always adhere to the 'customer-centric' service philosophy, using innovative thinking and professional capabilities to create maximum value for customers."
+    },
+    "businessScope": {
+      "title": "Business Scope",
+      "categories": [
+        {
+          "title": "Agricultural Field",
+          "services": [
+            "Technology Agricultural Enterprise Consulting",
+            "Traceability System Expansion Promotion",
+            "Agricultural Machinery Service Team Project Consulting",
+            "Young Farmers Creation Local Production and Local Consumption"
+          ]
+        },
+        {
+          "title": "Healthcare Field",
+          "services": [
+            "Health and Long-term Care Promotion Services",
+            "Sports Health Technology Applications",
+            "Senior Technology Industry Intellectual Property Layout"
+          ]
+        },
+        {
+          "title": "Intellectual Property Field",
+          "services": [
+            "Intellectual Property Promotion Services",
+            "Patent Search and Layout Competition",
+            "Industry Intellectual Property Consulting"
+          ]
+        },
+        {
+          "title": "Indigenous Industry",
+          "services": [
+            "Indigenous Product Channel Management",
+            "Tribal Industry Upgrade Project Management"
+          ]
+        },
+        {
+          "title": "Sustainable Development Field",
+          "services": [
+            "Net Zero Just Transition",
+            "Environmental Sustainable Development",
+            "Circular Economy Promotion"
+          ]
+        }
+      ]
+    },
+    "coreCapabilities": {
+      "title": "Core Capabilities",
+      "capabilities": [
+        {
+          "title": "Digital Transformation Capability",
+          "description": "Smart Agriculture 4.0 Technology Applications, IoT System Construction, Big Data Analysis and Applications, Artificial Intelligence Technology Introduction"
+        },
+        {
+          "title": "Sustainable Lean Capability",
+          "description": "Carbon Footprint Management and Carbon Reduction Consulting, Circular Economy Model Design, ESG Strategy Planning and Execution, Green Supply Chain Construction"
+        },
+        {
+          "title": "Cross-domain Integration Capability",
+          "description": "Agriculture + Technology Integration, Health + Technology Integration, Culture + Business Integration, Sustainability + Industry Integration"
+        },
+        {
+          "title": "Internationalization Capability",
+          "description": "International Market Expansion, Cross-border Supply Chain Construction, International Certification Consulting, Overseas Channel Development"
+        }
+      ]
+    },
+    "successCases": [
+      {
+        "title": "International Transformation of Qingmutang Cooperative",
+        "description": "Introduced IoT technology, activated over 20 hectares of abandoned land in Shuishang Township, signed trade cooperation memorandums with Japanese company Maohua Co., Ltd. and Fuhe Fresh, with expected overseas revenue CAGR of 10% for 3 consecutive years.",
+        "tags": ["Agriculture", "Internationalization", "IoT Technology"]
+      },
+      {
+        "title": "Smart Agriculture Transformation of Xianlv Agricultural Technology",
+        "description": "Established standardized field cultivation management, introduced IoT technology for field monitoring, contracted nearly 700 hectares of corn farmland, successfully negotiated cooperation with foreign large trading groups.",
+        "tags": ["Smart Agriculture", "IoT", "International Cooperation"]
+      },
+      {
+        "title": "LiMA Indigenous Product Channel Brand Establishment",
+        "description": "162 listed operators, about 2000 product items, established a complete virtual-real integrated channel network, successfully expanded international markets.",
+        "tags": ["Indigenous Industry", "E-commerce", "Brand Establishment"]
+      }
+    ],
+    "successCasesTitle": "Success Cases",
+    "teamGallery": "Team Gallery"
+  },
+  "contact": {
+    "title": "Contact Inquiry",
+    "subtitle": "Create the Future with Us",
+    "description": "If you are interested in our services or would like to learn more information, please feel free to contact us. We will sincerely provide you with professional consulting services.",
+    "info": {
+      "organization": "Corporate Synergy Development Center",
+      "englishName": "Corporate Synergy Development Center",
+      "address": "No. 7, Section 5, Xinyi Road, Xinyi District, Taipei City",
+      "phone": "+886-2-2345-6789",
+      "email": "info@csd.org.tw",
+      "website": "https://www.csd.org.tw"
+    },
+    "departments": [
+      {
+        "name": "Forward Service Department",
+        "phone": "+886-2-2345-6790",
+        "email": "forward@csd.org.tw"
+      },
+      {
+        "name": "Manufacturing Service Department",
+        "phone": "+886-2-2345-6791",
+        "email": "manufacturing@csd.org.tw"
+      },
+      {
+        "name": "Agricultural Service Department",
+        "phone": "+886-2-2345-6792",
+        "email": "agriculture@csd.org.tw"
+      }
+    ],
+    "departmentNames": [
+      "Forward Service Department",
+      "Manufacturing Service Department",
+      "Agricultural Service Department"
+    ],
+    "contactInfo": "Contact Information",
+    "departmentContacts": "Department Contact Methods",
+    "email": "info@csd.org.tw",
+    "website": "https://www.csd.org.tw",
+    "followUs": "Follow Us",
+    "contactUs": "Contact Us",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company Name",
+      "subject": "Subject",
+      "message": "Message",
+      "namePlaceholder": "Please enter your name",
+      "emailPlaceholder": "Please enter your email",
+      "companyPlaceholder": "Please enter your company name",
+      "subjectPlaceholder": "Please enter subject",
+      "messagePlaceholder": "Please enter your message",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "required": "*"
+    }
+  },
+  "footer": {
+    "serviceAreas": "Service Areas",
+    "forwardService": "Forward Service Department",
+    "industrySystem": "Industry System Construction",
+    "talentTraining": "Talent Training",
+    "innovationR&D": "Innovation R&D",
+    "quickLinks": "Quick Links",
+    "developmentHistory": "Development History",
+    "csdAchievements": "CSD Achievements",
+    "contactInquiry": "Contact Inquiry",
+    "copyright": "All rights reserved",
+    "allRightsReserved": "All rights reserved."
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const ContactContainer = styled.section`
@@ -238,6 +239,7 @@ interface ContactSectionProps {
 }
 
 const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -284,10 +286,10 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
           style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>
-            {data.contact.title}
+            {t('contact.title')}
           </h2>
           <p style={{ fontSize: '1.2rem', opacity: 0.9 }}>
-            {data.contact.description}
+            {t('contact.description')}
           </p>
         </motion.div>
 
@@ -298,39 +300,39 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <ContactInfo>
-              <h3>聯絡資訊</h3>
+              <h3>{t('contact.contactInfo')}</h3>
               
               <OrganizationInfo>
-                <OrganizationName>{data.contact.info.organization}</OrganizationName>
-                <EnglishName>{data.contact.info.englishName}</EnglishName>
+                <OrganizationName>{t('contact.info.organization')}</OrganizationName>
+                <EnglishName>{t('contact.info.englishName')}</EnglishName>
                 
                 <InfoItem>
                   <InfoIcon>📍</InfoIcon>
-                  <InfoText>{data.contact.info.address}</InfoText>
+                  <InfoText>{t('contact.info.address')}</InfoText>
                 </InfoItem>
                 
                 <InfoItem>
                   <InfoIcon>📞</InfoIcon>
-                  <InfoText>{data.contact.info.phone}</InfoText>
+                  <InfoText>{t('contact.info.phone')}</InfoText>
                 </InfoItem>
                 
                 <InfoItem>
                   <InfoIcon>✉️</InfoIcon>
-                  <InfoText>{data.contact.info.email}</InfoText>
+                  <InfoText>{t('contact.email')}</InfoText>
                 </InfoItem>
                 
                 <InfoItem>
                   <InfoIcon>🌐</InfoIcon>
-                  <InfoText>{data.contact.info.website}</InfoText>
+                  <InfoText>{t('contact.website')}</InfoText>
                 </InfoItem>
               </OrganizationInfo>
 
               <DepartmentsSection>
-                <h4>各部門聯絡方式</h4>
+                <h4>{t('contact.departmentContacts')}</h4>
                 <DepartmentList>
                   {data.contact.departments.map((dept: any, index: number) => (
                     <DepartmentItem key={index}>
-                      <DepartmentName>{dept.name}</DepartmentName>
+                      <DepartmentName>{t(`contact.departmentNames.${index}`)}</DepartmentName>
                       <DepartmentContact>
                         📞 {dept.phone} | ✉️ {dept.email}
                       </DepartmentContact>
@@ -340,7 +342,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
               </DepartmentsSection>
 
               <SocialMedia>
-                <h4>關注我們</h4>
+                <h4>{t('contact.followUs')}</h4>
                 <SocialLinks>
                   {data.contact.socialMedia.map((social: any, index: number) => (
                     <SocialLink key={index} href={social.url} target="_blank" rel="noopener noreferrer">
@@ -359,73 +361,73 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <ContactForm onSubmit={handleSubmit}>
-              <FormTitle>聯絡我們</FormTitle>
+              <FormTitle>{t('contact.contactUs')}</FormTitle>
               
               <FormGroup>
-                <Label htmlFor="name">姓名 *</Label>
+                <Label htmlFor="name">{t('contact.form.name')} {t('contact.form.required')}</Label>
                 <Input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="請輸入您的姓名"
+                  placeholder={t('contact.form.namePlaceholder')}
                   required
                 />
               </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="email">電子郵件 *</Label>
+                <Label htmlFor="email">{t('contact.form.email')} {t('contact.form.required')}</Label>
                 <Input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="請輸入您的電子郵件"
+                  placeholder={t('contact.form.emailPlaceholder')}
                   required
                 />
               </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="company">公司名稱</Label>
+                <Label htmlFor="company">{t('contact.form.company')}</Label>
                 <Input
                   type="text"
                   id="company"
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  placeholder="請輸入您的公司名稱"
+                  placeholder={t('contact.form.companyPlaceholder')}
                 />
               </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="subject">主旨 *</Label>
+                <Label htmlFor="subject">{t('contact.form.subject')} {t('contact.form.required')}</Label>
                 <Input
                   type="text"
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  placeholder="請輸入主旨"
+                  placeholder={t('contact.form.subjectPlaceholder')}
                   required
                 />
               </FormGroup>
 
               <FormGroup>
-                <Label htmlFor="message">訊息內容 *</Label>
+                <Label htmlFor="message">{t('contact.form.message')} {t('contact.form.required')}</Label>
                 <TextArea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="請輸入您的訊息內容"
+                  placeholder={t('contact.form.messagePlaceholder')}
                   required
                 />
               </FormGroup>
 
               <SubmitButton type="submit" disabled={isSubmitting}>
-                {isSubmitting ? '發送中...' : '發送訊息'}
+                {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
               </SubmitButton>
             </ContactForm>
           </motion.div>

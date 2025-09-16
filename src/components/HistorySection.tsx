@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const HistoryContainer = styled.section`
@@ -181,6 +182,7 @@ interface TimelineItemWithAnimationProps {
 }
 
 const TimelineItemWithAnimation: React.FC<TimelineItemWithAnimationProps> = ({ item, index }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.3);
 
   return (
@@ -193,9 +195,9 @@ const TimelineItemWithAnimation: React.FC<TimelineItemWithAnimationProps> = ({ i
     >
       <TimelineContent isLeft={index % 2 === 0} color={item.color}>
         <Year>{item.year}</Year>
-        <Title>{item.title}</Title>
-        <Description>{item.description}</Description>
-        <Background>{item.background}</Background>
+        <Title>{t(`history.timeline.${index}.title`)}</Title>
+        <Description>{t(`history.timeline.${index}.description`)}</Description>
+        <Background>{t(`history.timeline.${index}.background`)}</Background>
       </TimelineContent>
       <TimelineDot color={item.color} />
     </TimelineItem>
@@ -207,6 +209,7 @@ interface HistorySectionProps {
 }
 
 const HistorySection: React.FC<HistorySectionProps> = ({ data }) => {
+  const { t } = useTranslation();
   const [ref, isVisible] = useScrollAnimation(0.1);
 
   return (
@@ -223,7 +226,7 @@ const HistorySection: React.FC<HistorySectionProps> = ({ data }) => {
             transition={{ duration: 0.8 }}
             style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: '#2c3e50' }}
           >
-            {data.history.title}
+            {t('history.title')}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -231,7 +234,7 @@ const HistorySection: React.FC<HistorySectionProps> = ({ data }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             style={{ textAlign: 'center', fontSize: '1.2rem', color: '#7f8c8d', marginBottom: '3rem' }}
           >
-            {data.history.description}
+            {t('history.description')}
           </motion.p>
         </div>
 
@@ -250,27 +253,27 @@ const HistorySection: React.FC<HistorySectionProps> = ({ data }) => {
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <StatsTitle>今日的中衛發展中心</StatsTitle>
+          <StatsTitle>{t('history.currentTitle')}</StatsTitle>
           <StatsGrid>
             <StatItem>
-              <StatValue>{data.history.currentStats.servicePoints}</StatValue>
-              <StatLabel>服務據點</StatLabel>
+              <StatValue>{t('history.currentStats.servicePoints')}</StatValue>
+              <StatLabel>{t('history.statsLabels.servicePoints')}</StatLabel>
             </StatItem>
             <StatItem>
-              <StatValue>{data.history.currentStats.employees}</StatValue>
-              <StatLabel>專業人才</StatLabel>
+              <StatValue>{t('history.currentStats.employees')}</StatValue>
+              <StatLabel>{t('history.statsLabels.employees')}</StatLabel>
             </StatItem>
             <StatItem>
-              <StatValue>{data.history.currentStats.annualVisits}</StatValue>
-              <StatLabel>年度訪視企業</StatLabel>
+              <StatValue>{t('history.currentStats.annualVisits')}</StatValue>
+              <StatLabel>{t('history.statsLabels.annualVisits')}</StatLabel>
             </StatItem>
             <StatItem>
-              <StatValue>{data.history.currentStats.costReduction}</StatValue>
-              <StatLabel>協助降低成本</StatLabel>
+              <StatValue>{t('history.currentStats.costReduction')}</StatValue>
+              <StatLabel>{t('history.statsLabels.costReduction')}</StatLabel>
             </StatItem>
             <StatItem>
-              <StatValue>{data.history.currentStats.revenueIncrease}</StatValue>
-              <StatLabel>協助提升營收</StatLabel>
+              <StatValue>{t('history.currentStats.revenueIncrease')}</StatValue>
+              <StatLabel>{t('history.statsLabels.revenueIncrease')}</StatLabel>
             </StatItem>
           </StatsGrid>
         </StatsContainer>
