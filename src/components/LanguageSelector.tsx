@@ -7,7 +7,9 @@ const LanguageSelectorContainer = styled.div`
   display: inline-block;
 `;
 
-const SelectButton = styled.button<{ isDarkBackground: boolean }>`
+const SelectButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isDarkBackground',
+})<{ isDarkBackground: boolean }>`
   background: ${({ isDarkBackground }) => 
     isDarkBackground 
       ? 'rgba(255, 255, 255, 0.1)' 
@@ -48,7 +50,15 @@ const SelectButton = styled.button<{ isDarkBackground: boolean }>`
   }
 `;
 
-const Dropdown = styled.div<{ isOpen: boolean }>`
+const Dropdown = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+}).attrs<{ isOpen: boolean }>((props) => ({
+  style: {
+    opacity: props.isOpen ? 1 : 0,
+    visibility: props.isOpen ? 'visible' : 'hidden',
+    transform: props.isOpen ? 'translateY(0)' : 'translateY(-10px)',
+  },
+}))<{ isOpen: boolean }>`
   position: absolute;
   top: 100%;
   right: 0;
@@ -58,9 +68,6 @@ const Dropdown = styled.div<{ isOpen: boolean }>`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   min-width: 120px;
-  opacity: ${props => props.isOpen ? 1 : 0};
-  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
-  transform: ${props => props.isOpen ? 'translateY(0)' : 'translateY(-10px)'};
   transition: all 0.2s ease;
 `;
 
@@ -97,10 +104,15 @@ const Flag = styled.span`
   margin-right: 6px;
 `;
 
-const ChevronIcon = styled.span<{ isOpen: boolean }>`
+const ChevronIcon = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+}).attrs<{ isOpen: boolean }>((props) => ({
+  style: {
+    transform: props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+  },
+}))<{ isOpen: boolean }>`
   font-size: 12px;
   transition: transform 0.2s ease;
-  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
 `;
 
 const languages = [

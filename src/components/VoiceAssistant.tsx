@@ -58,7 +58,12 @@ const AssistantButton = styled.button<{ $isListening: boolean }>`
 `;
 
 // 語音辨識狀態顯示
-const StatusDisplay = styled.div<{ $show: boolean }>`
+const StatusDisplay = styled.div.attrs<{ $show: boolean }>((props) => ({
+  style: {
+    opacity: props.$show ? 1 : 0,
+    transform: props.$show ? 'translateY(0)' : 'translateY(10px)',
+  },
+}))`
   position: fixed;
   bottom: 210px;
   right: 30px;
@@ -69,21 +74,22 @@ const StatusDisplay = styled.div<{ $show: boolean }>`
   font-size: 14px;
   max-width: 300px;
   z-index: 1001;
-  opacity: ${props => props.$show ? 1 : 0};
-  transform: ${props => props.$show ? 'translateY(0)' : 'translateY(10px)'};
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 `;
 
 // 回饋 emoji 顯示
-const FeedbackEmoji = styled.div<{ $show: boolean }>`
+const FeedbackEmoji = styled.div.attrs<{ $show: boolean }>((props) => ({
+  style: {
+    opacity: props.$show ? 1 : 0,
+    transform: props.$show ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(20px)',
+  },
+}))`
   position: fixed;
   bottom: 290px;
   right: 30px;
   font-size: 50px;
   z-index: 1002;
-  opacity: ${props => props.$show ? 1 : 0};
-  transform: ${props => props.$show ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(20px)'};
   transition: all 0.3s ease;
   pointer-events: none;
 `;
@@ -247,10 +253,27 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
         i18n.changeLanguage(matchedAction);
         setStatusText(`${t('voiceAssistant.languageChanged') as string}: ${matchedKeyword}`);
         
-        // 更新語音辨識語言
-        if (recognitionRef.current) {
-          recognitionRef.current.lang = matchedAction === 'zh-TW' ? 'zh-TW' : matchedAction;
-          console.log('語音辨識語言已更新為:', recognitionRef.current.lang);
+        // 停止當前語音辨識並重新初始化
+        if (recognitionRef.current && isListening) {
+          // 先停止語音辨識
+          try {
+            recognitionRef.current.stop();
+          } catch (error) {
+            console.log('停止語音辨識時發生錯誤:', error);
+          }
+          
+          // 重置狀態
+          isListeningRef.current = false;
+          setIsListening(false);
+          setShowStatus(false);
+          
+          // 清除舊的語音辨識物件
+          recognitionRef.current = null;
+          
+          // 延遲重新啟動以確保語言切換完成
+          setTimeout(() => {
+            startListening();
+          }, 500);
         }
       } else {
         // 頁面跳轉
@@ -265,95 +288,7 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
     }
   }, [i18n, t, onNavigate, keywordMap]);
 
-  // 初始化語音辨識
-  useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      
-      const recognition = recognitionRef.current;
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = i18n.language === 'zh-TW' ? 'zh-TW' : i18n.language;
 
-      recognition.onstart = () => {
-        setIsListening(true);
-        isListeningRef.current = true;
-        setStatusText(t('voiceAssistant.listening') as string);
-        setShowStatus(true);
-      };
-
-      recognition.onresult = (event) => {
-        let finalTranscript = '';
-        let interimTranscript = '';
-
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript = event.results[i][0].transcript;
-          if (event.results[i].isFinal) {
-            finalTranscript += transcript;
-          } else {
-            interimTranscript += transcript;
-          }
-        }
-
-        if (interimTranscript) {
-          setStatusText(`${t('voiceAssistant.listening') as string}: ${interimTranscript}`);
-        }
-
-        if (finalTranscript) {
-          setStatusText(`${t('voiceAssistant.recognized') as string}: ${finalTranscript}`);
-          processVoiceCommand(finalTranscript);
-        }
-      };
-
-      recognition.onerror = (event) => {
-        console.error('語音辨識錯誤:', event.error);
-        setIsListening(false);
-        isListeningRef.current = false;
-        setShowStatus(false);
-        showFeedbackEmoji('❌');
-      };
-
-      recognition.onend = () => {
-        console.log('語音辨識結束，當前聆聽狀態:', isListeningRef.current);
-        // 如果還在聆聽模式，自動重新開始
-        if (isListeningRef.current) {
-          console.log('重新啟動語音辨識...');
-          setTimeout(() => {
-            if (recognitionRef.current && isListeningRef.current) {
-              try {
-                recognitionRef.current.start();
-                console.log('語音辨識重新啟動成功');
-              } catch (error) {
-                console.error('重新啟動語音辨識失敗:', error);
-                // 如果重新啟動失敗，等待更長時間再試
-                setTimeout(() => {
-                  if (recognitionRef.current && isListeningRef.current) {
-                    try {
-                      recognitionRef.current.start();
-                    } catch (e) {
-                      console.error('第二次重新啟動也失敗:', e);
-                    }
-                  }
-                }, 1000);
-              }
-            }
-          }, 100);
-        } else {
-          console.log('聆聽模式已關閉，不重新啟動');
-          setTimeout(() => setShowStatus(false), 2000);
-        }
-      };
-    }
-  }, [i18n.language, t, processVoiceCommand, isListening]);
-
-  // 監聽語言變化，重新初始化語音辨識
-  useEffect(() => {
-    if (recognitionRef.current && isListening) {
-      console.log('語言已變更，重新初始化語音辨識:', i18n.language);
-      recognitionRef.current.lang = i18n.language === 'zh-TW' ? 'zh-TW' : i18n.language;
-    }
-  }, [i18n.language, isListening]);
 
   // 顯示回饋 emoji
   const showFeedbackEmoji = (emoji: string) => {
@@ -364,11 +299,90 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
 
   // 開始語音辨識
   const startListening = () => {
-    if (recognitionRef.current && !isListening) {
-      setIsListening(true);
-      isListeningRef.current = true;
-      setShowHelp(false); // 開始聆聽時關閉幫助彈窗
-      recognitionRef.current.start();
+    if (!isListening && !isListeningRef.current) {
+      // 重新初始化語音辨識物件
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognitionRef.current = new SpeechRecognition();
+        
+        const recognition = recognitionRef.current;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = i18n.language === 'zh-TW' ? 'zh-TW' : i18n.language;
+
+        recognition.onstart = () => {
+          setIsListening(true);
+          isListeningRef.current = true;
+          setStatusText(t('voiceAssistant.listening') as string);
+          setShowStatus(true);
+        };
+
+        recognition.onresult = (event) => {
+          let finalTranscript = '';
+          let interimTranscript = '';
+
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += transcript;
+            } else {
+              interimTranscript += transcript;
+            }
+          }
+
+          if (interimTranscript) {
+            setStatusText(`${t('voiceAssistant.listening') as string}: ${interimTranscript}`);
+          }
+
+          if (finalTranscript) {
+            setStatusText(`${t('voiceAssistant.recognized') as string}: ${finalTranscript}`);
+            processVoiceCommand(finalTranscript);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          console.error('語音辨識錯誤:', event.error);
+          setIsListening(false);
+          isListeningRef.current = false;
+          // 只有在嚴重錯誤時才隱藏狀態框，不要因為重新啟動失敗就隱藏
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            setShowStatus(false);
+          }
+          showFeedbackEmoji('❌');
+        };
+
+        recognition.onend = () => {
+          console.log('語音辨識結束，當前聆聽狀態:', isListeningRef.current);
+          // 如果還在聆聽模式，自動重新開始
+          if (isListeningRef.current) {
+            console.log('重新啟動語音辨識...');
+            setTimeout(() => {
+              if (recognitionRef.current && isListeningRef.current) {
+                try {
+                  recognitionRef.current.start();
+                  console.log('語音辨識重新啟動成功');
+                } catch (error) {
+                  console.error('重新啟動語音辨識失敗:', error);
+                  // 重新啟動失敗時，停止聆聽模式
+                  setIsListening(false);
+                  isListeningRef.current = false;
+                  setShowStatus(false);
+                  showFeedbackEmoji('❌');
+                }
+              }
+            }, 100);
+          } else {
+            console.log('聆聽模式已關閉，不重新啟動');
+          }
+        };
+
+        setIsListening(true);
+        isListeningRef.current = true;
+        setStatusText(t('voiceAssistant.listening') as string);
+        setShowStatus(true); // 立即顯示狀態框
+        setShowHelp(false); // 開始聆聽時關閉幫助彈窗
+        recognition.start();
+      }
     }
   };
 
@@ -377,6 +391,7 @@ const VoiceAssistant: React.FC<VoiceAssistantProps> = ({ onNavigate }) => {
     if (recognitionRef.current && isListening) {
       setIsListening(false);
       isListeningRef.current = false;
+      setShowStatus(false); // 立即隱藏狀態顯示
       recognitionRef.current.stop();
     }
   };

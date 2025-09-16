@@ -4,19 +4,19 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 
-const HeaderContainer = styled(motion.header)<{ scrolled: boolean; isDarkBackground: boolean }>`
+const HeaderContainer = styled(motion.header)<{ $scrolled: boolean; $isDarkBackground: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: ${({ scrolled, isDarkBackground }) => {
-    if (scrolled) {
-      return isDarkBackground ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.95)';
+  background: ${({ $scrolled, $isDarkBackground }) => {
+    if ($scrolled) {
+      return $isDarkBackground ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)' : 'rgba(255, 255, 255, 0.95)';
     }
     return 'transparent';
   }};
-  backdrop-filter: ${({ scrolled }) => scrolled ? 'blur(10px)' : 'none'};
+  backdrop-filter: ${({ $scrolled }) => $scrolled ? 'blur(10px)' : 'none'};
   transition: all 0.3s ease;
   padding: 1rem 0;
 `;
@@ -47,7 +47,9 @@ const LogoImage = styled.img`
   width: auto;
 `;
 
-const LogoText = styled.div<{ isDarkBackground: boolean }>`
+const LogoText = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isDarkBackground',
+})<{ isDarkBackground: boolean }>`
   h1 {
     font-size: 1.5rem;
     color: ${({ isDarkBackground }) => isDarkBackground ? 'white' : '#2c3e50'};
@@ -62,7 +64,7 @@ const LogoText = styled.div<{ isDarkBackground: boolean }>`
   }
 `;
 
-const NavLinks = styled.ul<{ isOpen: boolean }>`
+const NavLinks = styled.ul<{ $isOpen: boolean; $isDarkBackground: boolean }>`
   display: flex;
   list-style: none;
   gap: 2rem;
@@ -71,24 +73,32 @@ const NavLinks = styled.ul<{ isOpen: boolean }>`
 
   @media (max-width: 768px) {
     position: fixed;
-    top: 100%;
+    top: 80px;
     left: 0;
     right: 0;
-    background: white;
+    background: ${({ $isDarkBackground }) => $isDarkBackground ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%)' : 'rgba(255, 255, 255, 0.95)'};
+    backdrop-filter: blur(10px);
     flex-direction: column;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transform: ${({ isOpen }) => isOpen ? 'translateY(0)' : 'translateY(-100%)'};
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 999;
+    transform: ${({ $isOpen }) => $isOpen ? 'translateY(0)' : 'translateY(-100%)'};
+    opacity: ${({ $isOpen }) => $isOpen ? 1 : 0};
+    visibility: ${({ $isOpen }) => $isOpen ? 'visible' : 'hidden'};
   }
 `;
 
-const NavLink = styled.li<{ isDarkBackground: boolean }>`
+const NavLink = styled.li.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isDarkBackground',
+})<{ isDarkBackground: boolean }>`
   a {
     color: ${({ isDarkBackground }) => isDarkBackground ? 'white' : '#2c3e50'};
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
+    display: block;
+    padding: 0.5rem 0;
 
     &:hover {
       color: ${({ isDarkBackground }) => isDarkBackground ? '#74b9ff' : '#3498db'};
@@ -108,10 +118,18 @@ const NavLink = styled.li<{ isDarkBackground: boolean }>`
     &:hover::after {
       width: 100%;
     }
+
+    @media (max-width: 768px) {
+      text-align: center;
+      font-size: 1.1rem;
+      padding: 1rem 0;
+    }
   }
 `;
 
-const MobileMenuButton = styled.button<{ isDarkBackground: boolean }>`
+const MobileMenuButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isDarkBackground',
+})<{ isDarkBackground: boolean }>`
   display: none;
   flex-direction: column;
   gap: 4px;
@@ -148,10 +166,18 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
       const historySection = document.querySelector('#history');
       
       if (heroSection && historySection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
         const historyTop = historySection.getBoundingClientRect().top;
         
-        // 如果在 Hero 區塊內，使用深色背景
-        setIsDarkBackground(historyTop > 0);
+        // 更精確的判斷：在 Hero 區塊內或剛離開 Hero 區塊時使用深色背景
+        // 考慮到 RWD 情境，增加一些緩衝區域
+        const isInHero = heroBottom > 100; // Hero 區塊底部還在視窗內
+        const isNearHistory = historyTop < 200; // 接近 History 區塊
+        
+        setIsDarkBackground(isInHero && !isNearHistory);
+      } else {
+        // 如果找不到區塊，根據滾動位置判斷
+        setIsDarkBackground(window.scrollY < 300);
       }
     };
 
@@ -171,8 +197,8 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
 
   return (
     <HeaderContainer
-      scrolled={scrolled}
-      isDarkBackground={isDarkBackground}
+      $scrolled={scrolled}
+      $isDarkBackground={isDarkBackground}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -187,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
         </Logo>
 
         <NavRight>
-          <NavLinks isOpen={mobileMenuOpen}>
+          <NavLinks $isOpen={mobileMenuOpen} $isDarkBackground={isDarkBackground}>
             {navItems.map((item) => (
               <NavLink key={item.label} isDarkBackground={isDarkBackground}>
                 <a 

@@ -34,9 +34,9 @@ const Timeline = styled.div`
   }
 `;
 
-const TimelineItem = styled(motion.div)<{ isLeft: boolean }>`
+const TimelineItem = styled(motion.div)<{ $isLeft: boolean }>`
   display: flex;
-  justify-content: ${({ isLeft }) => isLeft ? 'flex-end' : 'flex-start'};
+  justify-content: ${({ $isLeft }) => $isLeft ? 'flex-end' : 'flex-start'};
   margin-bottom: 80px;
   position: relative;
 
@@ -46,7 +46,7 @@ const TimelineItem = styled(motion.div)<{ isLeft: boolean }>`
   }
 `;
 
-const TimelineContent = styled.div<{ isLeft: boolean; color: string }>`
+const TimelineContent = styled.div<{ $isLeft: boolean; color: string }>`
   background: white;
   padding: 2rem;
   border-radius: 15px;
@@ -55,7 +55,7 @@ const TimelineContent = styled.div<{ isLeft: boolean; color: string }>`
   position: relative;
   border-left: 4px solid ${({ color }) => color};
 
-  ${({ isLeft, color }) => isLeft ? `
+  ${({ $isLeft, color }) => $isLeft ? `
     margin-right: 5%;
     border-left: none;
     border-right: 4px solid ${color};
@@ -74,11 +74,11 @@ const TimelineContent = styled.div<{ isLeft: boolean; color: string }>`
     content: '';
     position: absolute;
     top: 50%;
-    ${({ isLeft }) => isLeft ? 'right: -15px;' : 'left: -15px;'}
+    ${({ $isLeft }) => $isLeft ? 'right: -15px;' : 'left: -15px;'}
     width: 0;
     height: 0;
     border: 15px solid transparent;
-    border-${({ isLeft }) => isLeft ? 'left' : 'right'}-color: white;
+    border-${({ $isLeft }) => $isLeft ? 'left' : 'right'}-color: white;
     transform: translateY(-50%);
 
     @media (max-width: 768px) {
@@ -188,12 +188,12 @@ const TimelineItemWithAnimation: React.FC<TimelineItemWithAnimationProps> = ({ i
   return (
     <TimelineItem
       ref={ref}
-      isLeft={index % 2 === 0}
+      $isLeft={index % 2 === 0}
       initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
       animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
-      <TimelineContent isLeft={index % 2 === 0} color={item.color}>
+      <TimelineContent $isLeft={index % 2 === 0} color={item.color}>
         <Year>{item.year}</Year>
         <Title>{t(`history.timeline.${index}.title`)}</Title>
         <Description>{t(`history.timeline.${index}.description`)}</Description>

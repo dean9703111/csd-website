@@ -19,11 +19,11 @@ const CategoryTabs = styled.div`
   gap: 1rem;
 `;
 
-const TabButton = styled.button<{ active: boolean }>`
+const TabButton = styled.button<{ $active: boolean }>`
   padding: 12px 24px;
-  border: 2px solid ${({ active }) => active ? '#3498db' : '#e0e0e0'};
-  background: ${({ active }) => active ? '#3498db' : 'white'};
-  color: ${({ active }) => active ? 'white' : '#666'};
+  border: 2px solid ${({ $active }) => $active ? '#3498db' : '#e0e0e0'};
+  background: ${({ $active }) => $active ? '#3498db' : 'white'};
+  color: ${({ $active }) => $active ? 'white' : '#666'};
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
@@ -124,7 +124,7 @@ const AchievementsSection: React.FC<AchievementsSectionProps> = ({ data }) => {
           {data.achievements.categories.map((category: any, index: number) => (
             <TabButton
               key={index}
-              active={activeCategory === index}
+              $active={activeCategory === index}
               onClick={() => setActiveCategory(index)}
             >
               <span>{category.icon}</span>
